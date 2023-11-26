@@ -12,6 +12,11 @@ class BaseResponseModel(Response):
     timestamp: datetime
 
     def render(self, content: Any) -> bytes:
+        return self.dump(content=self.base(content=content))
+
+    def base(self, content: Any) -> dict:
+        return {"timestamp": current_datetime_with_timezone(), "data": content}
+
+    def dump(self, content: Any) -> bytes:
         assert orjson is not None, "orjson must be installed"
-        return orjson.dumps({"timestamp": current_datetime_with_timezone(), "data": content},
-                            option=orjson.OPT_INDENT_2)
+        return orjson.dumps(content, option=orjson.OPT_INDENT_2)
