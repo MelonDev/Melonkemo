@@ -8,6 +8,7 @@ from src.tools.converters.datetime_converter import current_datetime_with_timezo
 
 
 class BaseResponseModel(Response):
+    code: int = None
     media_type = "application/json"
     timestamp: datetime
 

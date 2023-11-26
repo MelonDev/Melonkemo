@@ -4,10 +4,8 @@ from src.models.response.base_response_model import BaseResponseModel
 
 
 class ErrorResponseModel(BaseResponseModel):
-    code = 400
-
     def __init__(self, content: str = None, code: int = None):
-        super().__init__(content=content, status_code=code if code is not None else self.code)
+        super().__init__(content=content, status_code=code if code is not None else 400)
 
     def response(self) -> BaseResponseModel: return ErrorResponseModel()
 
